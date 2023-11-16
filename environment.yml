@@ -1,0 +1,16 @@
+name: my_env
+channels:
+  - defaults
+dependencies:
+  - python==3.11.5
+  - numpy==1.23.5
+  - pandas==1.5.3
+  - scikit-learn==1.2.2
+  - flask==2.2.2
+  - matplotlib
+  - seaborn
+  - spyder
+  - shap
+  - pytest-flask
+  - xgboost
+prefix: /Users/agnes/anaconda3/envs/my_env
