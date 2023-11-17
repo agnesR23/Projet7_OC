@@ -11,6 +11,11 @@ dependencies:
   - seaborn
   - spyder
   - shap
-  - pytest-flask
   - xgboost
+  - streamlit
+  - plotly
+  - pip
+  - pip:
+      - streamlit-shap
+  
 prefix: /Users/agnes/anaconda3/envs/my_env
