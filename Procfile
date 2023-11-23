@@ -1,0 +1,1 @@
+web: gunicorn API:apistreamlit: sh setup.sh && streamlit run Dashboard.py
