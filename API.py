@@ -131,7 +131,6 @@ def index():
     return jsonify({'hello': 'world'})
     
     
-    
 @app.route("/reponse", methods=['POST'])
 def reponse():
     # récupérer l'identifiant

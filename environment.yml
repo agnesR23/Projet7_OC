@@ -1,4 +1,5 @@
 name: my_env
+
 channels:
   - defaults
 dependencies:
@@ -17,5 +18,6 @@ dependencies:
   - pip
   - pip:
       - streamlit-shap
+  
   
 prefix: /Users/agnes/anaconda3/envs/my_env

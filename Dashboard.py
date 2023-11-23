@@ -80,6 +80,7 @@ list_feature_names.remove('predict_proba')
 list_feature_names.remove('SK_ID_CURR')
 
 
+
 ###################################################################################################
 #Sélection du client
 
