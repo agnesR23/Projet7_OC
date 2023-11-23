@@ -12,12 +12,13 @@ dependencies:
   - seaborn
   - spyder
   - shap
-  - xgboost
-  - streamlit
-  - plotly
+  - xgboost==1.7.3
   - pip
   - pip:
+      - streamlit==1.28.2
       - streamlit-shap
+      - plotly==5.18
+      
   
   
 prefix: /Users/agnes/anaconda3/envs/my_env
