@@ -52,7 +52,7 @@ with image:
 def load_data():
     path = "DATA/Autre/df.csv"
     df = pd.read_csv(path)
-    path = "DATA/Autre/X_scal.npy"
+    path = "DATA/Source/X_scal.npy"
     X = np.load(path)
     return df, X
 
@@ -96,8 +96,8 @@ with st.sidebar:
 
 #Calcul d'une réponse non affichée pour lancer le modèle
 id_first=df.loc[0, "SK_ID_CURR"]
-#req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_first)})  #en local
-req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_first)})  #sur Heroku
+req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_first)})  #en local
+#req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_first)})  #sur Heroku
 temp = req.json()
 result = str(temp["Réponse"])
 #Scores du client
@@ -112,8 +112,8 @@ if id_filter==None:
     st.write("""#### ***En attente d'un numéro de client***""")
 else:
     #Calcul de la réponse à la demande de prêt par appel à l'API qui a calculé la probabilité du client
-    #req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_filter)})  #en local
-    req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_filter)})  #sur Heroku
+    req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_filter)})  #en local
+    #req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_filter)})  #sur Heroku
     temp = req.json()
     result = str(temp["Réponse"])
     #Scores du client
@@ -210,8 +210,8 @@ else:
         
         #Informations du client
         st.write("""#### Informations du client numéro : """+str(id_filter))
-        #req = requests.post('http://127.0.0.1:8080/data_customer/', json = {"Identifiant" : str(id_filter)})  #en local
-        req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/data_customer/', json = {"Identifiant" : str(id_filter)})  #sur Heroku
+        req = requests.post('http://127.0.0.1:8080/data_customer/', json = {"Identifiant" : str(id_filter)})  #en local
+        #req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/data_customer/', json = {"Identifiant" : str(id_filter)})  #sur Heroku
         info = req.json()['data']
         df_info = pd.DataFrame(info)
         df_info_tr = df_info.T

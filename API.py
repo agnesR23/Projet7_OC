@@ -24,9 +24,12 @@ import xgboost as xgb
 ##################################################################################################
 #Load data
 #Fichier à prédire qui a subi un préprocessing comme le fichier d'entraînement
-
 filename = "DATA/Source/df_predict_ft_reduit.csv"
 df_predict_ft_reduit = pd.read_csv(filename)
+
+#Fichier pour application du modèle XGBoost
+path = "DATA/Source/X_scal.npy"
+X_scal = np.load(path)
 
 
 
@@ -37,16 +40,6 @@ print('Dataframe de données à prédire avec 19 features sélectionnées préc�
 print('df shape : ', df_predict_ft_reduit.shape)
 df_predict_ft_reduit
 
-##################################################################################################
-
-
-
-
-
-#Suppression feature SK_ID_CURR pour le modèle
-X = df_predict_ft_reduit.drop('SK_ID_CURR', axis=1)
-print('Dataframe sans SK_ID_CURR :')
-print(X)
 
 
 
@@ -57,29 +50,6 @@ model = xgb.XGBClassifier()
 model.load_model("MODELS/xgb_model.json")
 print('Type du fichier :', type(model))
 
-
-
-path = "MODELS/imputer.sav"
-f = open(path, 'rb')
-imputer = pickle.load(f)
-print('Type du fichier :', type(imputer))
-f.close()
-
-path = "MODELS/scaler.sav"
-f = open(path, 'rb')
-scaler = pickle.load(f)
-print('Type du fichier :', type(scaler))
-f.close()
-
-
-##################################################################################################
-#Application de l'imputer sauvegardé et du standardscaler
-X_imp = imputer.transform(X)
-X_scal = scaler.transform(X_imp)
-
-#Sauvegarde de X_scal qui servira pour shap dans streamlit
-path = 'DATA/Autre/X_scal.npy'
-np.save(path, X_scal)
 
 
 ##################################################################################################
