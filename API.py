@@ -25,36 +25,26 @@ import xgboost as xgb
 #Load data
 #Fichier à prédire qui a subi un préprocessing comme le fichier d'entraînement
 
-filename = "DATA/Source/df_prec.csv"
-df_prec = pd.read_csv(filename)
+filename = "DATA/Source/df_predict_ft_reduit.csv"
+df_predict_ft_reduit = pd.read_csv(filename)
 
 
 
 ##################################################################################################
     
 #Présentation du DF à prédire
-print('Dataframe de données à prédire avec 19 features sélectionnées précédemment :')
-print('df_prec shape : ', df_prec.shape)
-df_prec
+print('Dataframe de données à prédire avec 19 features sélectionnées précédemment et réduit :')
+print('df shape : ', df_predict_ft_reduit.shape)
+df_predict_ft_reduit
 
 ##################################################################################################
 
 
-#Load 18 features sélectionnées précédemment sans 'SK_ID_CURR'
-feat = 'DATA/Autre/arr_list_feat_pred18.npy'
-arr_list_feat_pred18 = np.load(feat)  
-list_feat_pred18 = list(arr_list_feat_pred18) 
-print(list_feat_pred18)
-
-#Load 19 features avec 'SK_ID_CURR'
-feat = 'DATA/Autre/arr_list_feat_pred19.npy'
-arr_list_feat_pred19 = np.load(feat)  
-list_feat_pred19 = list(arr_list_feat_pred19)
-print(list_feat_pred19)
 
 
-#Suppression feature SK_ID_CURR pour le modèle (sélection sans SK_ID_CURR)
-X = df_prec[list_feat_pred18]
+
+#Suppression feature SK_ID_CURR pour le modèle
+X = df_predict_ft_reduit.drop('SK_ID_CURR', axis=1)
 print('Dataframe sans SK_ID_CURR :')
 print(X)
 
@@ -100,7 +90,7 @@ y_predict = (model.predict_proba(X_scal)[:,1] >= 0.535).astype(int)
 
 ##################################################################################################
 #Ajout de la probabilité et de la prédiction au DF et colonne réponse
-df = df_prec.copy()
+df = df_predict_ft_reduit.copy()
 df['predict_proba'] = y_predict_prob
 df['predict'] = y_predict
 df['Demande_credit'] = np.nan
@@ -111,8 +101,8 @@ df.loc[df['predict'] == 1, 'Demande_credit'] = "Refusée"
 print("Vérification que le modèle prédit les targets dans les mêmes proportions que dans le notebook")
 print(df['predict'].value_counts(normalize=True))
 print("Résultats dans le notebook :")
-print("0    0.681171")
-print("1    0.318829")
+print("0    0.681198")
+print("1    0.318802")
 
 #Sauvegarde de df pour streamlit
 path = 'DATA/Autre/df.csv'
@@ -163,8 +153,8 @@ def data_customer():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-#    app.run(host="0.0.0.0", port=8080, debug=True) en local
+    #app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True) #en local
 
 
 
