@@ -101,6 +101,7 @@ req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse',
 #temp = req.json()
 temp = req.text
 st.write(temp)
+'''
 #result = str(temp["Réponse"])
 #Scores du client
 seuil = str(((1-0.535)*100))
@@ -384,6 +385,6 @@ else:
         st.write("Demande credit = ", z.values[0])
         
         
-        
+'''
     
     
