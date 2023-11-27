@@ -98,8 +98,10 @@ with st.sidebar:
 id_first=df.loc[0, "SK_ID_CURR"]
 #req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_first)})  #en local
 req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_first)})  #sur Heroku
-temp = req.json()
-result = str(temp["Réponse"])
+#temp = req.json()
+temp = req.text
+st.write(temp)
+#result = str(temp["Réponse"])
 #Scores du client
 seuil = str(((1-0.535)*100))
 proba = float(temp["Proba_client"])
@@ -114,9 +116,7 @@ else:
     #Calcul de la réponse à la demande de prêt par appel à l'API qui a calculé la probabilité du client
     #req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_filter)})  #en local
     req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_filter)})  #sur Heroku
-    #temp = req.json()
-    temp = req.text
-    st.write(temp)
+    temp = req.json()
     result = str(temp["Réponse"])
     #Scores du client
     seuil = str(((1-0.535)*100))
