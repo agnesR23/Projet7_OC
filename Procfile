@@ -1,1 +1,1 @@
-web: gunicorn API:appstreamlit: sh setup.sh && streamlit run --server.port $PORT app.py
+web: gunicorn API:app && sh setup.sh && streamlit run --server.port $PORT app.py
