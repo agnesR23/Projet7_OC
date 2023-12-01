@@ -101,12 +101,13 @@ headers = {
 }
 
 
-
+st.write('ok')
 #Calcul d'une réponse non affichée pour lancer le modèle
 id_first=df.loc[0, "SK_ID_CURR"]
 #req = requests.post('http://127.0.0.1:8080/reponse', json = {"Identifiant" : str(id_first)})  #en local
 req = requests.post('https://oc-scoring-app-ba70506f2004.herokuapp.com/reponse', json = {"Identifiant" : str(id_first)}, headers=headers)  #sur Heroku
 st.write(req.status_code)
+
 
 
 
